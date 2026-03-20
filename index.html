@@ -225,7 +225,9 @@
     padding: 16px; text-align: center;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
     cursor: pointer; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
   }
+  .donut-card .color-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 8px 8px 0 0; }
   .donut-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(99,102,241,0.15); }
   .donut-card.selected { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
   .donut-card canvas { max-width: 120px; max-height: 120px; }
@@ -1018,8 +1020,9 @@ function renderDonutGrid() {
     card.className = 'card donut-card';
     card.onclick = () => openSpecDetail(spec.name);
     card.innerHTML = `
+      <div class="color-bar" style="background:${color}"></div>
       <canvas id="donut-${idx}" width="120" height="120"></canvas>
-      <div class="donut-name" title="${spec.name}">${spec.name}</div>
+      <div class="donut-name" title="${spec.name}" style="color:${color}">${spec.name}</div>
       <div class="donut-detail">${done}/${spec.total} chap. · ${spec.hours}h</div>
       <div class="donut-badges">
         ${remH>0?`<span class="micro-badge" style="background:var(--red-dim);color:var(--red);">${remH}H</span>`:''}
